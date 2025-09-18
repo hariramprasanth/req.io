@@ -27,24 +27,9 @@ jobs:
       - name: Build app
         run: yarn dist
 
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.os }}-artifacts
-          path: dist/*
-  
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: release
-
-      - name: Create GitHub Release
+      - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          files: release/**/*
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
