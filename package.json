@@ -71,12 +71,11 @@
       "dist/**/*",
       "dist-electron/**/*"
     ],
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ]
-    },
+     "mac": {
+    "category": "public.app-category.developer-tools",
+    "target": ["dmg", "zip"],
+    "universalApp": true
+  },
     "linux": {
       "target": [
         "AppImage",
