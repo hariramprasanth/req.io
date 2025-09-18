@@ -66,15 +66,18 @@
     "vitest": "^0.34.6"
   },
   "build": {
-    "appId": "com.reqio.app",
+    "appId": "com.anil.reqio",
     "files": [
       "dist/**/*",
       "dist-electron/**/*"
     ],
-       "mac": {
-    "category": "public.app-category.developer-tools",
-    "target": ["dmg", "zip"]
-  },
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
     "linux": {
       "target": [
         "AppImage",
