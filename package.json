@@ -71,10 +71,10 @@
       "dist/**/*",
       "dist-electron/**/*"
     ],
-     "mac": {
+       "mac": {
     "category": "public.app-category.developer-tools",
     "target": ["dmg", "zip"],
-    "universalApp": true
+    "arch": ["x64", "arm64"]   
   },
     "linux": {
       "target": [
