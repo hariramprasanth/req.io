@@ -31,17 +31,10 @@ jobs:
       - name: Build Electron app
         run: yarn dist -- --mac --${{ matrix.arch }}
 
-      # 5. Upload build artifacts for debugging/fallback
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: electron-build-${{ matrix.arch }}
-          path: dist/**/*
-
-      # 6. Create GitHub release and upload artifacts
+      # 5. Create GitHub release and upload artifacts
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/**/*.{dmg,zip}
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
