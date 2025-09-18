@@ -73,8 +73,7 @@
     ],
        "mac": {
     "category": "public.app-category.developer-tools",
-    "target": ["dmg", "zip"],
-    "arch": ["x64", "arm64"]   
+    "target": ["dmg", "zip"]
   },
     "linux": {
       "target": [
