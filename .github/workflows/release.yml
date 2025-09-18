@@ -3,34 +3,45 @@ name: Build & Release
 on:
   push:
     tags:
-      - "v*.*.*"   # triggers only on version tags like v1.0.0
+      - "v*.*.*"
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest]
-        arch: [x64, arm64]
+        arch: [x64, arm64]  # build for Intel and Apple Silicon
+    runs-on: macos-latest
 
     steps:
+      # 1. Checkout the repo
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
 
+      # 3. Install dependencies
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build app
-        run: yarn dist
+      # 4. Build Electron app for the specific architecture
+      - name: Build Electron app
+        run: yarn dist -- --mac --${{ matrix.arch }}
 
+      # 5. Upload build artifacts for debugging/fallback
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: electron-build-${{ matrix.arch }}
+          path: dist/**/*
+
+      # 6. Create GitHub release and upload artifacts
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/*
+          files: dist/**/*.{dmg,zip}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

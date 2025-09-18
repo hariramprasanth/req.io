@@ -76,13 +76,15 @@
       "target": [
         "dmg",
         "zip"
-      ]
+      ],
+      "icon": "assets/icon.png"
     },
     "linux": {
       "target": [
         "AppImage",
         "deb"
-      ]
+      ],
+      "icon": "assets/icon.png"
     }
   },
   "main": "dist-electron/main.js"
