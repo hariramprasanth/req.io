@@ -9,7 +9,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [x64, arm64]  # build for Intel and Apple Silicon
+        arch: [x64]  # build for Intel and Apple Silicon
     runs-on: macos-latest
 
     steps:
