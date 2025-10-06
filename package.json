@@ -2,7 +2,7 @@
   "name": "req.io",
   "author": "anil",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.9",
   "scripts": {
     "dev": "vite",
     "build": "vite build && electron-builder",
