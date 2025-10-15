@@ -11,8 +11,17 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [x64]  # build for Intel and Apple Silicon
-    runs-on: macos-latest
+        include:
+          - os: macos-latest
+            target: mac
+            arch: x64
+          - os: windows-latest
+            target: win
+            arch: x64
+          - os: ubuntu-latest
+            target: linux
+            arch: x64
+    runs-on: ${{ matrix.os }}
 
     steps:
       # 1. Checkout the repo
@@ -29,15 +38,15 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      # 4. Build Electron app for the specific architecture
+      # 4. Build Electron app for the specific OS and architecture
       - name: Build Electron app
-        run: yarn dist -- --mac --${{ matrix.arch }}
+        run: yarn dist -- --${{ matrix.target }} --${{ matrix.arch }}
 
       # 5. Create GitHub release and upload artifacts
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
           files: dist/*
-          name: "req.io-${{ matrix.arch }}-${{ github.ref_name }}"
+          name: "req.io-${{ matrix.target }}-${{ github.ref_name }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
