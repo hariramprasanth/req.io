@@ -137,7 +137,7 @@ describe(`AppBody`, () => {
     });
 
     expect(mockedComponents.responsePanel?.statusCode).toBe(200);
-    expect(mockedComponents.responsePanel?.statusText).toBe('OK');
+    expect(mockedComponents.responsePanel?.statusText).toBe('OK1');
     expect(mockedComponents.responsePanel?.response).toBe(JSON.stringify('put response', null, 2));
   });
 
